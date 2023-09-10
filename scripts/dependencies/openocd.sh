@@ -52,10 +52,11 @@ function openocd_build()
       cd "${XBB_SOURCES_FOLDER_PATH}/${openocd_src_folder_name}"
 
       (
-        if [ ! -d "autom4te.cache" ]
-        then
+        # Force bootstrap
+        # if [ ! -d "autom4te.cache" ]
+        # then
           ./bootstrap
-        fi
+        # fi
       ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${openocd_folder_name}/configure-output-$(ndate).txt"
 
       # Personalise the greeting message
@@ -118,6 +119,7 @@ function openocd_build()
           config_options=()
 
           config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
+          config_options+=("--program-prefix=${XBB_EXECUTABLES_PREFIX}")
 
           config_options+=("--build=${XBB_BUILD_TRIPLET}")
           config_options+=("--host=${XBB_HOST_TRIPLET}")
@@ -162,6 +164,7 @@ function openocd_build()
           config_options+=("--enable-jlink")
           config_options+=("--enable-jtag_vpi")
           config_options+=("--enable-kitprog")
+          config_options+=("--enable-wlink")
           # Deprecated
           # config_options+=("--enable-oocd_trace")
           config_options+=("--enable-opendous")
@@ -315,14 +318,14 @@ function openocd_test()
 
   echo
   echo "Checking the openocd shared libraries..."
-  show_host_libs "${test_bin_path}/openocd"
+  show_host_libs "${test_bin_path}/${XBB_EXECUTABLES_PREFIX}openocd"
 
   echo
   echo "Checking if openocd starts..."
 
-  run_host_app_verbose "${test_bin_path}/openocd" --version
+  run_host_app_verbose "${test_bin_path}/${XBB_EXECUTABLES_PREFIX}openocd" --version
 
-  run_host_app_verbose "${test_bin_path}/openocd" \
+  run_host_app_verbose "${test_bin_path}/${XBB_EXECUTABLES_PREFIX}openocd" \
     -c "adapter driver dummy" \
     -c "adapter speed 1000" \
     -c "adapter list" \

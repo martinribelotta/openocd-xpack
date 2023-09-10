@@ -38,8 +38,9 @@ XBB_NPM_PACKAGE="${XBB_NPM_PACKAGE:-"@xpack-dev-tools/${XBB_APPLICATION_LOWER_CA
 # If you want to build OpenOCD from another repo then uncomment the
 # following defines and tweak as needed.
 
-# XBB_APPLICATION_OPENOCD_GIT_URL="https://github.com/openocd-org/openocd.git"
-# XBB_APPLICATION_OPENOCD_GIT_BRANCH="master"
-# XBB_APPLICATION_OPENOCD_GIT_COMMIT="HEAD"
+XBB_APPLICATION_OPENOCD_GIT_URL="https://github.com/kprasadvnsi/riscv-openocd-wch.git"
+XBB_APPLICATION_OPENOCD_GIT_BRANCH="master"
+XBB_APPLICATION_OPENOCD_GIT_COMMIT="HEAD"
+XBB_EXECUTABLES_PREFIX="wch-"
 
 # -----------------------------------------------------------------------------
